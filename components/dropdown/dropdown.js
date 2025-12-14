@@ -33,6 +33,9 @@ export function dropdown(trigger, menu, opts = {}) {
     const anchor = `--anchor-${menu.id}`;
     trigger.style.anchorName = anchor;
     menu.style.positionAnchor = anchor;
+
+    // Clean and set placement
+    menu.classList.remove('top', 'bottom', 'left', 'right', 'top-start', 'top-end', 'bottom-start', 'bottom-end', 'left-start', 'left-end', 'right-start', 'right-end');
     menu.classList.add(placement);
 
     const entry = { hide, children, parent: null };
@@ -134,13 +137,22 @@ export function dropdown(trigger, menu, opts = {}) {
 
     const handleItemClick = (e) => {
         if (isDestroyed) return;
-        if (e.target.closest('[data-dropdown-item]')) closeAll();
+        if (e.target.closest('[data-dropdown-item]') || e.target.matches('button:not([aria-haspopup])')) {
+             // Close if it's an actionable item (not a submenu trigger)
+             closeAll();
+        }
     };
 
     // Events
     if (openOnHover) {
         trigger.addEventListener('mouseenter', handleMouseEnter);
         menu.addEventListener('mouseleave', handleMouseLeave);
+        // Also need to handle trigger mouseleave to close?
+        // Usually hover menus are tricky.
+        // Current implementation: menu.mouseleave closes.
+        // trigger.mouseenter opens.
+        // If I leave trigger and NOT enter menu, it stays open?
+        trigger.addEventListener('mouseleave', handleMouseLeave);
     } else {
         trigger.addEventListener('click', handleClick);
     }
@@ -179,6 +191,7 @@ export function dropdown(trigger, menu, opts = {}) {
             if (openOnHover) {
                 trigger.removeEventListener('mouseenter', handleMouseEnter);
                 menu.removeEventListener('mouseleave', handleMouseLeave);
+                trigger.removeEventListener('mouseleave', handleMouseLeave);
             } else {
                 trigger.removeEventListener('click', handleClick);
             }
