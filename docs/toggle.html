@@ -68,15 +68,15 @@
         <section>
             <h2>1. Basic</h2>
             <div class="row">
-                <button type="button" aria-pressed="false" class="toggle-btn"><i data-lucide="bold"></i></button>
-                <button type="button" aria-pressed="true" class="toggle-btn"><i data-lucide="italic"></i></button>
-                <button type="button" aria-pressed="false" class="toggle-btn"><i data-lucide="underline"></i></button>
+                <button type="button" aria-pressed="false" class="toggle-btn standalone"><i data-lucide="bold"></i></button>
+                <button type="button" aria-pressed="true" class="toggle-btn standalone"><i data-lucide="italic"></i></button>
+                <button type="button" aria-pressed="false" class="toggle-btn standalone"><i data-lucide="underline"></i></button>
             </div>
         </section>
 
         <section>
-            <h2>2. Toggle Group</h2>
-            <div class="toggle-group" role="group" aria-label="Text alignment">
+            <h2>2. Toggle Group (Exclusive)</h2>
+            <div class="toggle-group" role="group" aria-label="Text alignment" id="align-group">
                 <button type="button" aria-pressed="true" aria-label="Left align"><i
                         data-lucide="align-left"></i></button>
                 <button type="button" aria-pressed="false" aria-label="Center align"><i
@@ -89,9 +89,9 @@
         <section>
             <h2>3. With Text</h2>
             <div class="row">
-                <button type="button" aria-pressed="false" class="toggle-btn"><i data-lucide="bookmark"></i>
+                <button type="button" aria-pressed="false" class="toggle-btn standalone"><i data-lucide="bookmark"></i>
                     Bookmark</button>
-                <button type="button" aria-pressed="true" class="toggle-btn"><i data-lucide="bell"></i>
+                <button type="button" aria-pressed="true" class="toggle-btn standalone"><i data-lucide="bell"></i>
                     Notifications</button>
             </div>
         </section>
@@ -99,7 +99,7 @@
 
     <script type="module">
         import { initTheme, toggleTheme } from '../js/theme.js';
-        import { toggle } from '../components/toggle/toggle.js';
+        import { toggle, toggleGroup } from '../components/toggle/toggle.js';
 
         initTheme();
         lucide.createIcons();
@@ -108,8 +108,11 @@
             lucide.createIcons();
         });
 
-        // Initialize toggles
-        document.querySelectorAll('[aria-pressed]').forEach(toggle);
+        // Initialize standalone toggles
+        document.querySelectorAll('.toggle-btn.standalone').forEach(toggle);
+
+        // Initialize toggle group
+        toggleGroup(document.getElementById('align-group'));
     </script>
 </body>
 

@@ -10,9 +10,10 @@
     color: var(--popover-foreground);
     box-shadow: var(--shadow-md);
     border-radius: var(--radius);
-    inset: unset;
+    inset: unset; /* Important for anchor positioning */
     position: absolute;
     max-width: 20rem;
+    width: max-content;
 }
 
 [popover]::backdrop {
@@ -36,4 +37,65 @@
         opacity: 0;
         transform: scale(0.95);
     }
+}
+
+/* Placements (Anchor Positioning) */
+.bottom {
+    position: absolute;
+    top: anchor(bottom);
+    left: anchor(center);
+    translate: -50% 0;
+    margin-top: 8px;
+}
+
+.top {
+    position: absolute;
+    bottom: anchor(top);
+    left: anchor(center);
+    translate: -50% 0;
+    margin-bottom: 8px;
+}
+
+.left {
+    position: absolute;
+    right: anchor(left);
+    top: anchor(center);
+    translate: 0 -50%;
+    margin-right: 8px;
+}
+
+.right {
+    position: absolute;
+    left: anchor(right);
+    top: anchor(center);
+    translate: 0 -50%;
+    margin-left: 8px;
+}
+
+.bottom-start {
+    position: absolute;
+    top: anchor(bottom);
+    left: anchor(left);
+    margin-top: 8px;
+}
+
+.bottom-end {
+    position: absolute;
+    top: anchor(bottom);
+    right: anchor(right);
+    margin-top: 8px;
+}
+
+.top-start {
+    position: absolute;
+    bottom: anchor(top);
+    left: anchor(left);
+    margin-bottom: 8px;
+}
+
+.top-end {
+    position: absolute;
+    bottom: anchor(top);
+    right: anchor(right);
+    margin-bottom: 8px;
 }

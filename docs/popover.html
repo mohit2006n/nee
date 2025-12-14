@@ -14,6 +14,7 @@
             max-width: 600px;
             margin: 0 auto;
             padding: 2rem;
+            min-height: 150vh;
         }
 
         .header {
@@ -25,14 +26,17 @@
 
         .header h1 {
             margin: 0;
+            font-size: 1.5rem;
+            font-weight: 600;
         }
 
         section {
-            margin-bottom: 3rem;
+            margin-bottom: 4rem;
         }
 
         h2 {
-            font-size: 1.25rem;
+            font-size: 1rem;
+            font-weight: 600;
             margin-bottom: 1rem;
             border-bottom: 1px solid var(--border);
             padding-bottom: 0.5rem;
@@ -43,13 +47,10 @@
             gap: 1rem;
             flex-wrap: wrap;
             justify-content: center;
+            align-items: center;
             padding: 2rem 0;
-        }
-
-        code {
             background: var(--secondary);
-            padding: 0.2rem 0.4rem;
-            border-radius: var(--radius-sm);
+            border-radius: var(--radius);
         }
     </style>
 </head>
@@ -64,45 +65,56 @@
             </button>
         </div>
         <p style="color: var(--muted-foreground); margin-bottom: 2rem;">Click-triggered floating content using native
-            Popover API.</p>
+            Popover API and CSS Anchor Positioning.</p>
 
         <section>
-            <h2>1. Basic</h2>
-            <button popovertarget="pop-1" class="btn">Open Popover</button>
-            <div id="pop-1" popover>
+            <h2>Basic</h2>
+            <button id="btn-basic" class="btn">Open Popover</button>
+            <div id="pop-basic" role="tooltip">
                 <p style="margin-bottom: 0.5rem; font-weight: 500;">Popover Content</p>
                 <p style="color: var(--muted-foreground); font-size: 0.875rem;">Click outside to dismiss.</p>
             </div>
         </section>
 
         <section>
-            <h2>2. Placements</h2>
+            <h2>Placements</h2>
             <div class="row">
-                <button id="t-top" class="btn btn-sm">Top</button>
-                <div id="p-top" popover="manual">Top popover</div>
+                <div style="position: relative;">
+                    <button id="t-top" class="btn btn-sm">Top</button>
+                    <div id="p-top">Top popover</div>
+                </div>
 
-                <button id="t-bottom" class="btn btn-sm">Bottom</button>
-                <div id="p-bottom" popover="manual">Bottom popover</div>
+                <div style="position: relative;">
+                    <button id="t-left" class="btn btn-sm">Left</button>
+                    <div id="p-left">Left popover</div>
+                </div>
 
-                <button id="t-left" class="btn btn-sm">Left</button>
-                <div id="p-left" popover="manual">Left popover</div>
+                <div style="position: relative;">
+                    <button id="t-right" class="btn btn-sm">Right</button>
+                    <div id="p-right">Right popover</div>
+                </div>
 
-                <button id="t-right" class="btn btn-sm">Right</button>
-                <div id="p-right" popover="manual">Right popover</div>
+                <div style="position: relative;">
+                    <button id="t-bottom" class="btn btn-sm">Bottom</button>
+                    <div id="p-bottom">Bottom popover</div>
+                </div>
             </div>
         </section>
 
         <section>
-            <h2>3. Interactive Content</h2>
-            <button popovertarget="pop-form" class="btn btn-primary"><i data-lucide="settings"></i> Settings</button>
-            <div id="pop-form" popover>
+            <h2>Interactive Content</h2>
+            <button id="btn-form" class="btn btn-primary"><i data-lucide="settings"></i> Settings</button>
+            <div id="pop-form">
                 <p style="font-weight: 500; margin-bottom: 1rem;">Quick Settings</p>
-                <label style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+                <label style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem; font-size: 0.875rem;">
                     <input type="checkbox" checked> Notifications
                 </label>
-                <label style="display: flex; align-items: center; gap: 0.5rem;">
+                <label style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.875rem;">
                     <input type="checkbox"> Auto-save
                 </label>
+                <div style="margin-top: 1rem; text-align: right;">
+                    <button class="btn btn-sm btn-ghost" onclick="document.getElementById('pop-form').hidePopover()">Close</button>
+                </div>
             </div>
         </section>
     </div>
@@ -118,10 +130,17 @@
             lucide.createIcons();
         });
 
+        // Basic
+        popover(document.getElementById('btn-basic'), document.getElementById('pop-basic'), { placement: 'bottom-start' });
+
+        // Placements
         popover(document.getElementById('t-top'), document.getElementById('p-top'), { placement: 'top' });
         popover(document.getElementById('t-bottom'), document.getElementById('p-bottom'), { placement: 'bottom' });
         popover(document.getElementById('t-left'), document.getElementById('p-left'), { placement: 'left' });
         popover(document.getElementById('t-right'), document.getElementById('p-right'), { placement: 'right' });
+
+        // Form
+        popover(document.getElementById('btn-form'), document.getElementById('pop-form'), { placement: 'bottom-start' });
     </script>
 </body>
 
