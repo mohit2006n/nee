@@ -1,0 +1,72 @@
+/**
+ * Toggle CSS
+ */
+
+[aria-pressed] {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--background);
+    color: var(--foreground);
+    font: inherit;
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+[aria-pressed]:hover {
+    background: var(--secondary);
+}
+
+[aria-pressed]:focus {
+    outline: none;
+}
+
+[aria-pressed]:focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+}
+
+/* Pressed */
+[aria-pressed="true"] {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: var(--primary-foreground);
+}
+
+[aria-pressed="true"]:hover {
+    opacity: 0.9;
+}
+
+/* Disabled */
+[aria-pressed]:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+/* Toggle Group */
+.toggle-group {
+    display: inline-flex;
+    gap: 0;
+}
+
+.toggle-group [aria-pressed] {
+    border-radius: 0;
+}
+
+.toggle-group [aria-pressed]:first-child {
+    border-radius: var(--radius) 0 0 var(--radius);
+}
+
+.toggle-group [aria-pressed]:last-child {
+    border-radius: 0 var(--radius) var(--radius) 0;
+}
+
+.toggle-group [aria-pressed]:not(:first-child) {
+    border-left: none;
+}

@@ -1,0 +1,101 @@
+/**
+ * Tooltip CSS
+ */
+
+[data-tooltip] {
+    position: relative;
+    display: inline-block;
+}
+
+[data-tooltip]:not(a, button, input, [role="button"]) {
+    border-bottom: 1px dotted currentColor;
+    cursor: help;
+}
+
+[data-tooltip]::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    z-index: 9999;
+    padding: 0.5rem 0.75rem;
+    background: var(--foreground);
+    color: var(--background);
+    font-size: 0.875rem;
+    font-weight: 500;
+    line-height: 1.4;
+    text-align: center;
+    white-space: nowrap;
+    border-radius: var(--radius-sm);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.2s ease, visibility 0.2s ease, transform 0.2s ease;
+}
+
+/* Show */
+[data-tooltip]:hover::after,
+[data-tooltip]:focus::after {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Top (default) */
+[data-tooltip]::after,
+[data-tooltip][data-placement="top"]::after {
+    bottom: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+[data-tooltip]:hover::after,
+[data-tooltip][data-placement="top"]:hover::after,
+[data-tooltip]:focus::after,
+[data-tooltip][data-placement="top"]:focus::after {
+    transform: translateX(-50%) translateY(-4px);
+}
+
+/* Bottom */
+[data-tooltip][data-placement="bottom"]::after {
+    top: calc(100% + 8px);
+    bottom: auto;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+[data-tooltip][data-placement="bottom"]:hover::after,
+[data-tooltip][data-placement="bottom"]:focus::after {
+    transform: translateX(-50%) translateY(4px);
+}
+
+/* Left */
+[data-tooltip][data-placement="left"]::after {
+    top: 50%;
+    right: calc(100% + 8px);
+    bottom: auto;
+    left: auto;
+    transform: translateY(-50%);
+}
+
+[data-tooltip][data-placement="left"]:hover::after,
+[data-tooltip][data-placement="left"]:focus::after {
+    transform: translateY(-50%) translateX(-4px);
+}
+
+/* Right */
+[data-tooltip][data-placement="right"]::after {
+    top: 50%;
+    left: calc(100% + 8px);
+    bottom: auto;
+    right: auto;
+    transform: translateY(-50%);
+}
+
+[data-tooltip][data-placement="right"]:hover::after,
+[data-tooltip][data-placement="right"]:focus::after {
+    transform: translateY(-50%) translateX(4px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    [data-tooltip]::after {
+        transition: none;
+    }
+}

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toggle Showcase</title>
+    <link rel="stylesheet" href="../css/globals.css">
+    <link rel="stylesheet" href="../components/toggle/toggle.css">
+    <link rel="stylesheet" href="../components/button/button.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .header h1 {
+            margin: 0;
+        }
+
+        section {
+            margin-bottom: 3rem;
+        }
+
+        h2 {
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 0.5rem;
+        }
+
+        .row {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        code {
+            background: var(--secondary);
+            padding: 0.2rem 0.4rem;
+            border-radius: var(--radius-sm);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Toggle</h1>
+            <button id="theme-toggle" class="btn btn-icon btn-ghost" aria-label="Toggle theme">
+                <i data-lucide="sun" class="dark:hidden"></i>
+                <i data-lucide="moon" class="hidden dark:block"></i>
+            </button>
+        </div>
+        <p style="color: var(--muted-foreground); margin-bottom: 2rem;">Two-state button using
+            <code>aria-pressed</code>.</p>
+
+        <section>
+            <h2>1. Basic</h2>
+            <div class="row">
+                <button type="button" aria-pressed="false" class="toggle-btn"><i data-lucide="bold"></i></button>
+                <button type="button" aria-pressed="true" class="toggle-btn"><i data-lucide="italic"></i></button>
+                <button type="button" aria-pressed="false" class="toggle-btn"><i data-lucide="underline"></i></button>
+            </div>
+        </section>
+
+        <section>
+            <h2>2. Toggle Group</h2>
+            <div class="toggle-group" role="group" aria-label="Text alignment">
+                <button type="button" aria-pressed="true" aria-label="Left align"><i
+                        data-lucide="align-left"></i></button>
+                <button type="button" aria-pressed="false" aria-label="Center align"><i
+                        data-lucide="align-center"></i></button>
+                <button type="button" aria-pressed="false" aria-label="Right align"><i
+                        data-lucide="align-right"></i></button>
+            </div>
+        </section>
+
+        <section>
+            <h2>3. With Text</h2>
+            <div class="row">
+                <button type="button" aria-pressed="false" class="toggle-btn"><i data-lucide="bookmark"></i>
+                    Bookmark</button>
+                <button type="button" aria-pressed="true" class="toggle-btn"><i data-lucide="bell"></i>
+                    Notifications</button>
+            </div>
+        </section>
+    </div>
+
+    <script type="module">
+        import { initTheme, toggleTheme } from '../js/theme.js';
+        import { toggle } from '../components/toggle/toggle.js';
+
+        initTheme();
+        lucide.createIcons();
+        document.getElementById('theme-toggle').addEventListener('click', () => {
+            toggleTheme();
+            lucide.createIcons();
+        });
+
+        // Initialize toggles
+        document.querySelectorAll('[aria-pressed]').forEach(toggle);
+    </script>
+</body>
+
+</html>

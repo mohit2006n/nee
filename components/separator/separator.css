@@ -1,0 +1,52 @@
+/**
+ * Separator CSS
+ */
+
+hr,
+[role="separator"] {
+    border: none;
+    margin: 1rem 0;
+}
+
+/* Horizontal */
+hr,
+[role="separator"]:not([aria-orientation="vertical"]) {
+    height: 1px;
+    background: var(--border);
+}
+
+/* Vertical */
+[role="separator"][aria-orientation="vertical"] {
+    width: 1px;
+    height: auto;
+    align-self: stretch;
+    background: var(--border);
+    margin: 0 1rem;
+}
+
+/* Decorative */
+[role="none"],
+hr[role="none"] {
+    background: var(--border);
+}
+
+/* With text */
+.separator-with-text {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 1.5rem 0;
+}
+
+.separator-with-text::before,
+.separator-with-text::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+}
+
+.separator-with-text span {
+    color: var(--muted-foreground);
+    font-size: 0.875rem;
+}

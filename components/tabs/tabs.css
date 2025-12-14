@@ -1,0 +1,83 @@
+/**
+ * Tabs CSS
+ */
+
+[role="tablist"] {
+    display: flex;
+    gap: 0;
+    border-bottom: 1px solid var(--border);
+}
+
+[role="tablist"][aria-orientation="vertical"] {
+    flex-direction: column;
+    border-bottom: none;
+    border-right: 1px solid var(--border);
+}
+
+[role="tab"] {
+    padding: 0.75rem 1rem;
+    margin: 0;
+    border: none;
+    background: none;
+    font: inherit;
+    color: var(--muted-foreground);
+    cursor: pointer;
+    position: relative;
+    transition: color 0.15s ease;
+}
+
+[role="tab"]:hover {
+    color: var(--foreground);
+}
+
+[role="tab"]:focus {
+    outline: none;
+}
+
+[role="tab"]:focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: -2px;
+}
+
+/* Selected */
+[role="tab"][aria-selected="true"] {
+    color: var(--foreground);
+    font-weight: 500;
+}
+
+[role="tab"][aria-selected="true"]::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -1px;
+    height: 2px;
+    background: var(--primary);
+}
+
+[role="tablist"][aria-orientation="vertical"] [role="tab"][aria-selected="true"]::after {
+    top: 0;
+    bottom: 0;
+    left: auto;
+    right: -1px;
+    width: 2px;
+    height: auto;
+}
+
+/* Panel */
+[role="tabpanel"] {
+    padding: 1rem 0;
+}
+
+[role="tabpanel"][hidden] {
+    display: none;
+}
+
+[role="tabpanel"]:focus {
+    outline: none;
+}
+
+[role="tabpanel"]:focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+}

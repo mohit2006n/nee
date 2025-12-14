@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dropdown Menu</title>
+    <link rel="stylesheet" href="../css/globals.css">
+    <link rel="stylesheet" href="../components/dropdown/dropdown.css">
+    <link rel="stylesheet" href="../components/button/button.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            min-height: 200vh;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .description {
+            color: var(--muted-foreground);
+            margin-bottom: 2rem;
+        }
+
+        section {
+            margin-bottom: 4rem;
+        }
+
+        h2 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .row {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            align-items: flex-start;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Dropdown Menu</h1>
+            <button id="theme-toggle" class="btn btn-icon btn-ghost" aria-label="Toggle theme">
+                <i data-lucide="sun" class="dark:hidden"></i>
+                <i data-lucide="moon" class="hidden dark:block"></i>
+            </button>
+        </div>
+        <p class="description">Displays a menu to the user — such as a set of actions or functions — triggered by a
+            button.</p>
+
+        <!-- Basic -->
+        <section>
+            <h2>Basic</h2>
+            <button id="trigger-basic" class="btn btn-outline">
+                Open <i data-lucide="chevron-down"></i>
+            </button>
+            <div id="menu-basic" popover="manual" role="menu" class="bottom-start">
+                <button class="menu-item"><i data-lucide="user"></i> Profile</button>
+                <button class="menu-item"><i data-lucide="settings"></i> Settings</button>
+                <button class="menu-item"><i data-lucide="log-out"></i> Log out</button>
+            </div>
+        </section>
+
+        <!-- With Labels & Shortcuts -->
+        <section>
+            <h2>With Labels & Shortcuts</h2>
+            <button id="trigger-full" class="btn btn-outline">
+                My Account <i data-lucide="chevron-down"></i>
+            </button>
+            <div id="menu-full" popover="manual" role="menu" class="bottom-start">
+                <div class="menu-label">My Account</div>
+                <div class="menu-separator"></div>
+                <button class="menu-item">
+                    <i data-lucide="user"></i> Profile
+                    <span class="shortcut">⇧⌘P</span>
+                </button>
+                <button class="menu-item">
+                    <i data-lucide="credit-card"></i> Billing
+                    <span class="shortcut">⌘B</span>
+                </button>
+                <button class="menu-item">
+                    <i data-lucide="settings"></i> Settings
+                    <span class="shortcut">⌘S</span>
+                </button>
+                <div class="menu-separator"></div>
+                <button class="menu-item">
+                    <i data-lucide="log-out"></i> Log out
+                    <span class="shortcut">⇧⌘Q</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- With Submenus -->
+        <section>
+            <h2>With Submenus</h2>
+            <button id="trigger-sub" class="btn btn-outline">
+                More Options <i data-lucide="chevron-down"></i>
+            </button>
+            <div id="menu-sub" popover="manual" role="menu" class="bottom-start">
+                <button class="menu-item"><i data-lucide="arrow-left"></i> Back</button>
+                <button class="menu-item"><i data-lucide="rotate-cw"></i> Reload</button>
+                <div class="menu-separator"></div>
+                <button id="sub-more" class="menu-item submenu-trigger">More Tools</button>
+                <div id="menu-more" popover="manual" role="menu" class="submenu right-start">
+                    <button class="menu-item">Save Page As...</button>
+                    <button class="menu-item">Create Shortcut...</button>
+                    <button class="menu-item">Developer Tools</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- With Checkboxes -->
+        <section>
+            <h2>With Checkboxes</h2>
+            <button id="trigger-check" class="btn btn-outline">
+                View <i data-lucide="chevron-down"></i>
+            </button>
+            <div id="menu-check" popover="manual" role="menu" class="bottom-start">
+                <button class="menu-item" role="menuitemcheckbox" aria-checked="true">Status Bar</button>
+                <button class="menu-item" role="menuitemcheckbox" aria-checked="false">Activity Bar</button>
+                <button class="menu-item" role="menuitemcheckbox" aria-checked="true">Panel</button>
+            </div>
+        </section>
+
+        <!-- Destructive -->
+        <section>
+            <h2>Destructive Actions</h2>
+            <button id="trigger-danger" class="btn btn-outline">
+                Actions <i data-lucide="chevron-down"></i>
+            </button>
+            <div id="menu-danger" popover="manual" role="menu" class="bottom-start">
+                <button class="menu-item"><i data-lucide="copy"></i> Duplicate</button>
+                <button class="menu-item"><i data-lucide="archive"></i> Archive</button>
+                <div class="menu-separator"></div>
+                <button class="menu-item destructive">
+                    <i data-lucide="trash-2"></i> Delete
+                    <span class="shortcut">⌘⌫</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- Placements -->
+        <section>
+            <h2>Placements</h2>
+            <div class="row">
+                <div>
+                    <button id="p-top" class="btn btn-sm btn-secondary">Top</button>
+                    <div id="m-top" popover="manual" role="menu" class="top"><button class="menu-item">Item</button>
+                    </div>
+                </div>
+                <div>
+                    <button id="p-bottom" class="btn btn-sm btn-secondary">Bottom</button>
+                    <div id="m-bottom" popover="manual" role="menu" class="bottom-start"><button
+                            class="menu-item">Item</button></div>
+                </div>
+                <div>
+                    <button id="p-left" class="btn btn-sm btn-secondary">Left</button>
+                    <div id="m-left" popover="manual" role="menu" class="left"><button class="menu-item">Item</button>
+                    </div>
+                </div>
+                <div>
+                    <button id="p-right" class="btn btn-sm btn-secondary">Right</button>
+                    <div id="m-right" popover="manual" role="menu" class="right-start"><button
+                            class="menu-item">Item</button></div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script type="module">
+        import { initTheme, toggleTheme } from '../js/theme.js';
+        import { dropdown, submenu } from '../components/dropdown/dropdown.js';
+
+        initTheme();
+        lucide.createIcons();
+        document.getElementById('theme-toggle').addEventListener('click', () => {
+            toggleTheme();
+            lucide.createIcons();
+        });
+
+        // Basic
+        dropdown(document.getElementById('trigger-basic'), document.getElementById('menu-basic'));
+
+        // Full menu
+        dropdown(document.getElementById('trigger-full'), document.getElementById('menu-full'));
+
+        // With Submenus
+        dropdown(document.getElementById('trigger-sub'), document.getElementById('menu-sub'));
+        submenu(document.getElementById('sub-more'), document.getElementById('menu-more'));
+
+        // Checkboxes
+        const checkMenu = document.getElementById('menu-check');
+        dropdown(document.getElementById('trigger-check'), checkMenu);
+        checkMenu.querySelectorAll('[role="menuitemcheckbox"]').forEach(item => {
+            item.addEventListener('click', () => {
+                const checked = item.getAttribute('aria-checked') === 'true';
+                item.setAttribute('aria-checked', !checked);
+            });
+        });
+
+        // Destructive
+        dropdown(document.getElementById('trigger-danger'), document.getElementById('menu-danger'));
+
+        // Placements
+        dropdown(document.getElementById('p-top'), document.getElementById('m-top'), { placement: 'top' });
+        dropdown(document.getElementById('p-bottom'), document.getElementById('m-bottom'), { placement: 'bottom-start' });
+        dropdown(document.getElementById('p-left'), document.getElementById('m-left'), { placement: 'left' });
+        dropdown(document.getElementById('p-right'), document.getElementById('m-right'), { placement: 'right-start' });
+    </script>
+</body>
+
+</html>

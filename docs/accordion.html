@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accordion</title>
+    <link rel="stylesheet" href="../css/globals.css">
+    <link rel="stylesheet" href="../components/accordion/accordion.css">
+    <link rel="stylesheet" href="../components/button/button.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .description {
+            color: var(--muted-foreground);
+            margin-bottom: 2rem;
+        }
+
+        section {
+            margin-bottom: 3rem;
+        }
+
+        h2 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Accordion</h1>
+            <button id="theme-toggle" class="btn btn-icon btn-ghost" aria-label="Toggle theme">
+                <i data-lucide="sun" class="dark:hidden"></i>
+                <i data-lucide="moon" class="hidden dark:block"></i>
+            </button>
+        </div>
+        <p class="description">A vertically stacked set of interactive headings that each reveal a section of content.
+        </p>
+
+        <section>
+            <h2>Static Icon (No Transform)</h2>
+            <details>
+                <summary>
+                    <span>Just an icon, no animation</span>
+                    <i data-lucide="chevron-down" class="icon-indicator"></i>
+                </summary>
+                <div>The icon stays static - no rotation or transform applied.</div>
+            </details>
+        </section>
+
+        <section>
+            <h2>Static Icon with Custom Transform</h2>
+            <details>
+                <summary>
+                    <span>Rotates 180° on open</span>
+                    <i data-lucide="chevron-down" class="icon-indicator" style="--transform: rotate(180deg)"></i>
+                </summary>
+                <div>Add style="--transform: rotate(180deg)" for chevron flip.</div>
+            </details>
+            <details>
+                <summary>
+                    <span>Rotates 90° on open</span>
+                    <i data-lucide="chevron-right" class="icon-indicator" style="--transform: rotate(90deg)"></i>
+                </summary>
+                <div>Add style="--transform: rotate(90deg)" for right-to-down.</div>
+            </details>
+        </section>
+
+        <section>
+            <h2>Swap Icons (No Rotation)</h2>
+            <details>
+                <summary>
+                    <span>Plus/Minus swap</span>
+                    <i data-lucide="plus" class="icon-closed"></i>
+                    <i data-lucide="minus" class="icon-open"></i>
+                </summary>
+                <div>Use .icon-closed and .icon-open to swap between two icons.</div>
+            </details>
+            <details>
+                <summary>
+                    <span>Chevron up/down swap</span>
+                    <i data-lucide="chevron-down" class="icon-closed"></i>
+                    <i data-lucide="chevron-up" class="icon-open"></i>
+                </summary>
+                <div>Swaps between chevron-down (closed) and chevron-up (open).</div>
+            </details>
+        </section>
+
+        <section>
+            <h2>No Icon</h2>
+            <details>
+                <summary>Plain accordion</summary>
+                <div>If you don't add any icon element, no icon is shown.</div>
+            </details>
+        </section>
+
+        <section>
+            <h2>Single (Exclusive)</h2>
+            <details name="faq">
+                <summary>
+                    <span>What is your refund policy?</span>
+                    <i data-lucide="chevron-down" class="icon-indicator" style="--transform: rotate(180deg)"></i>
+                </summary>
+                <div>If you're unhappy with your purchase, email us within 90 days for a full refund.</div>
+            </details>
+            <details name="faq">
+                <summary>
+                    <span>Do you offer technical support?</span>
+                    <i data-lucide="chevron-down" class="icon-indicator" style="--transform: rotate(180deg)"></i>
+                </summary>
+                <div>Yes, we offer 24/7 technical support via email and live chat.</div>
+            </details>
+        </section>
+    </div>
+
+    <script type="module">
+        import { initTheme, toggleTheme } from '../js/theme.js';
+        initTheme();
+        lucide.createIcons();
+        document.getElementById('theme-toggle').addEventListener('click', () => {
+            toggleTheme();
+            lucide.createIcons();
+        });
+    </script>
+</body>
+
+</html>

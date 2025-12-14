@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabs Showcase</title>
+    <link rel="stylesheet" href="../css/globals.css">
+    <link rel="stylesheet" href="../components/tabs/tabs.css">
+    <link rel="stylesheet" href="../components/button/button.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .header h1 {
+            margin: 0;
+        }
+
+        section {
+            margin-bottom: 3rem;
+        }
+
+        h2 {
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 0.5rem;
+        }
+
+        code {
+            background: var(--secondary);
+            padding: 0.2rem 0.4rem;
+            border-radius: var(--radius-sm);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Tabs</h1>
+            <button id="theme-toggle" class="btn btn-icon btn-ghost" aria-label="Toggle theme">
+                <i data-lucide="sun" class="dark:hidden"></i>
+                <i data-lucide="moon" class="hidden dark:block"></i>
+            </button>
+        </div>
+        <p style="color: var(--muted-foreground); margin-bottom: 2rem;">Accessible tabs with keyboard support.</p>
+
+        <section>
+            <h2>1. Basic Horizontal</h2>
+            <div role="tablist" aria-label="Account settings">
+                <button role="tab" aria-selected="true" aria-controls="panel-1" id="tab-1">Profile</button>
+                <button role="tab" aria-selected="false" aria-controls="panel-2" id="tab-2">Password</button>
+                <button role="tab" aria-selected="false" aria-controls="panel-3" id="tab-3">Billing</button>
+            </div>
+            <div role="tabpanel" id="panel-1" aria-labelledby="tab-1">
+                <h3 style="margin-bottom: 0.5rem;">Profile Settings</h3>
+                <p>Manage your public profile information.</p>
+            </div>
+            <div role="tabpanel" id="panel-2" aria-labelledby="tab-2" hidden>
+                <h3 style="margin-bottom: 0.5rem;">Password</h3>
+                <p>Change your password here.</p>
+            </div>
+            <div role="tabpanel" id="panel-3" aria-labelledby="tab-3" hidden>
+                <h3 style="margin-bottom: 0.5rem;">Billing</h3>
+                <p>Manage your subscription and payment methods.</p>
+            </div>
+        </section>
+
+        <section>
+            <h2>2. Vertical</h2>
+            <div style="display: flex; gap: 2rem;">
+                <div role="tablist" aria-orientation="vertical" aria-label="Vertical tabs">
+                    <button role="tab" aria-selected="true" aria-controls="v-panel-1" id="v-tab-1">General</button>
+                    <button role="tab" aria-selected="false" aria-controls="v-panel-2" id="v-tab-2">Advanced</button>
+                </div>
+                <div style="flex: 1;">
+                    <div role="tabpanel" id="v-panel-1" aria-labelledby="v-tab-1">
+                        <p>General settings content.</p>
+                    </div>
+                    <div role="tabpanel" id="v-panel-2" aria-labelledby="v-tab-2" hidden>
+                        <p>Advanced configuration options.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script type="module">
+        import { initTheme, toggleTheme } from '../js/theme.js';
+        import { tabs } from '../components/tabs/tabs.js';
+
+        initTheme();
+        lucide.createIcons();
+        document.getElementById('theme-toggle').addEventListener('click', () => {
+            toggleTheme();
+            lucide.createIcons();
+        });
+
+        // Initialize all tablists
+        document.querySelectorAll('[role="tablist"]').forEach(tabs);
+    </script>
+</body>
+
+</html>

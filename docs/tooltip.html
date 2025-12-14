@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tooltip Showcase</title>
+    <link rel="stylesheet" href="../css/globals.css">
+    <link rel="stylesheet" href="../components/tooltip/tooltip.css">
+    <link rel="stylesheet" href="../components/button/button.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .header h1 {
+            margin: 0;
+        }
+
+        section {
+            margin-bottom: 3rem;
+        }
+
+        h2 {
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 0.5rem;
+        }
+
+        .row {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 2rem 0;
+        }
+
+        code {
+            background: var(--secondary);
+            padding: 0.2rem 0.4rem;
+            border-radius: var(--radius-sm);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Tooltip</h1>
+            <button id="theme-toggle" class="btn btn-icon btn-ghost" aria-label="Toggle theme">
+                <i data-lucide="sun" class="dark:hidden"></i>
+                <i data-lucide="moon" class="hidden dark:block"></i>
+            </button>
+        </div>
+        <p style="color: var(--muted-foreground); margin-bottom: 2rem;">Pure CSS tooltips.</p>
+
+        <section>
+            <h2>1. Basic</h2>
+            <div style="text-align: center;">
+                <span data-tooltip="Helper text" tabindex="0">Hover me</span>
+            </div>
+        </section>
+
+        <section>
+            <h2>2. Placements</h2>
+            <div class="row">
+                <button class="btn btn-sm" data-tooltip="Placement: Top" data-placement="top">Top</button>
+                <button class="btn btn-sm" data-tooltip="Placement: Bottom" data-placement="bottom">Bottom</button>
+                <button class="btn btn-sm" data-tooltip="Placement: Left" data-placement="left">Left</button>
+                <button class="btn btn-sm" data-tooltip="Placement: Right" data-placement="right">Right</button>
+            </div>
+        </section>
+
+        <section>
+            <h2>3. Elements</h2>
+            <div class="row">
+                <a href="#" data-tooltip="Link tooltip">Link</a>
+                <button class="btn" data-tooltip="Button tooltip">Button</button>
+                <input type="text" placeholder="Input" data-tooltip="Input tooltip"
+                    style="padding: 0.5rem; border: 1px solid var(--border); border-radius: var(--radius-sm);">
+            </div>
+        </section>
+    </div>
+
+    <script type="module">
+        import { initTheme, toggleTheme } from '../js/theme.js';
+
+        initTheme();
+        lucide.createIcons();
+        document.getElementById('theme-toggle').addEventListener('click', () => {
+            toggleTheme();
+            lucide.createIcons();
+        });
+    </script>
+</body>
+
+</html>

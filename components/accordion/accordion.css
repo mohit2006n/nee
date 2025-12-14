@@ -1,0 +1,91 @@
+/**
+ * Accordion CSS - Shadcn Style
+ */
+
+details {
+    border-bottom: 1px solid var(--border);
+}
+
+details:last-of-type {
+    border-bottom: none;
+}
+
+summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 0;
+    font-weight: 500;
+    cursor: pointer;
+    user-select: none;
+    list-style: none;
+    transition: all 0.15s ease;
+}
+
+summary::-webkit-details-marker {
+    display: none;
+}
+
+summary:hover {
+    text-decoration: underline;
+}
+
+summary:focus {
+    outline: none;
+}
+
+/* Icon sizing */
+summary svg,
+summary i {
+    width: 1rem;
+    height: 1rem;
+    flex-shrink: 0;
+}
+
+/* Option 1: Swap Icons
+   Use .icon-closed and .icon-open to show different icons
+   Example:
+   <summary>
+       <span>Title</span>
+       <i class="icon-closed">▼</i>
+       <i class="icon-open">▲</i>
+   </summary>
+*/
+summary .icon-open,
+details[open] summary .icon-closed {
+    display: none;
+}
+
+summary .icon-closed,
+details[open] summary .icon-open {
+    display: block;
+}
+
+/* Option 2: Indicator Icon (Static)
+   Use .icon-indicator for a single static icon
+   Add style="--transform: ..." for custom transform on open
+   Example:
+   <summary>
+       <span>Title</span>
+       <i class="icon-indicator">▼</i>
+   </summary>
+   
+   With transform:
+   <i class="icon-indicator" style="--transform: rotate(180deg)">▼</i>
+*/
+summary .icon-indicator {
+    transition: transform 0.2s ease;
+}
+
+details[open] summary .icon-indicator {
+    transform: var(--transform);
+}
+
+/* Content */
+details>div,
+details>p,
+details> :not(summary) {
+    padding-bottom: 1rem;
+    font-size: 0.875rem;
+    color: var(--muted-foreground);
+}

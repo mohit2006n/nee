@@ -1,0 +1,77 @@
+/**
+ * Progress CSS
+ */
+
+progress {
+    appearance: none;
+    width: 100%;
+    height: 0.5rem;
+    border: none;
+    border-radius: 9999px;
+    background: var(--secondary);
+    overflow: hidden;
+}
+
+progress::-webkit-progress-bar {
+    background: var(--secondary);
+    border-radius: 9999px;
+}
+
+progress::-webkit-progress-value {
+    background: var(--primary);
+    border-radius: 9999px;
+    transition: width 0.3s ease;
+}
+
+progress::-moz-progress-bar {
+    background: var(--primary);
+    border-radius: 9999px;
+}
+
+/* Indeterminate */
+progress:indeterminate {
+    background: linear-gradient(90deg,
+            var(--secondary) 0%,
+            var(--secondary) 40%,
+            var(--primary) 50%,
+            var(--secondary) 60%,
+            var(--secondary) 100%);
+    background-size: 200% 100%;
+    animation: progress-indeterminate 1.5s linear infinite;
+}
+
+progress:indeterminate::-webkit-progress-bar {
+    background: transparent;
+}
+
+progress:indeterminate::-moz-progress-bar {
+    background: transparent;
+}
+
+@keyframes progress-indeterminate {
+    0% {
+        background-position: 200% 0;
+    }
+
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+/* Sizes */
+progress.sm {
+    height: 0.25rem;
+}
+
+progress.lg {
+    height: 0.75rem;
+}
+
+/* Colors */
+progress.destructive::-webkit-progress-value {
+    background: var(--destructive);
+}
+
+progress.destructive::-moz-progress-bar {
+    background: var(--destructive);
+}

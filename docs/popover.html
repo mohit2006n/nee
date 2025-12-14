@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Popover Showcase</title>
+    <link rel="stylesheet" href="../css/globals.css">
+    <link rel="stylesheet" href="../components/popover/popover.css">
+    <link rel="stylesheet" href="../components/button/button.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .header h1 {
+            margin: 0;
+        }
+
+        section {
+            margin-bottom: 3rem;
+        }
+
+        h2 {
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 0.5rem;
+        }
+
+        .row {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 2rem 0;
+        }
+
+        code {
+            background: var(--secondary);
+            padding: 0.2rem 0.4rem;
+            border-radius: var(--radius-sm);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Popover</h1>
+            <button id="theme-toggle" class="btn btn-icon btn-ghost" aria-label="Toggle theme">
+                <i data-lucide="sun" class="dark:hidden"></i>
+                <i data-lucide="moon" class="hidden dark:block"></i>
+            </button>
+        </div>
+        <p style="color: var(--muted-foreground); margin-bottom: 2rem;">Click-triggered floating content using native
+            Popover API.</p>
+
+        <section>
+            <h2>1. Basic</h2>
+            <button popovertarget="pop-1" class="btn">Open Popover</button>
+            <div id="pop-1" popover>
+                <p style="margin-bottom: 0.5rem; font-weight: 500;">Popover Content</p>
+                <p style="color: var(--muted-foreground); font-size: 0.875rem;">Click outside to dismiss.</p>
+            </div>
+        </section>
+
+        <section>
+            <h2>2. Placements</h2>
+            <div class="row">
+                <button id="t-top" class="btn btn-sm">Top</button>
+                <div id="p-top" popover="manual">Top popover</div>
+
+                <button id="t-bottom" class="btn btn-sm">Bottom</button>
+                <div id="p-bottom" popover="manual">Bottom popover</div>
+
+                <button id="t-left" class="btn btn-sm">Left</button>
+                <div id="p-left" popover="manual">Left popover</div>
+
+                <button id="t-right" class="btn btn-sm">Right</button>
+                <div id="p-right" popover="manual">Right popover</div>
+            </div>
+        </section>
+
+        <section>
+            <h2>3. Interactive Content</h2>
+            <button popovertarget="pop-form" class="btn btn-primary"><i data-lucide="settings"></i> Settings</button>
+            <div id="pop-form" popover>
+                <p style="font-weight: 500; margin-bottom: 1rem;">Quick Settings</p>
+                <label style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+                    <input type="checkbox" checked> Notifications
+                </label>
+                <label style="display: flex; align-items: center; gap: 0.5rem;">
+                    <input type="checkbox"> Auto-save
+                </label>
+            </div>
+        </section>
+    </div>
+
+    <script type="module">
+        import { initTheme, toggleTheme } from '../js/theme.js';
+        import { popover } from '../components/popover/popover.js';
+
+        initTheme();
+        lucide.createIcons();
+        document.getElementById('theme-toggle').addEventListener('click', () => {
+            toggleTheme();
+            lucide.createIcons();
+        });
+
+        popover(document.getElementById('t-top'), document.getElementById('p-top'), { placement: 'top' });
+        popover(document.getElementById('t-bottom'), document.getElementById('p-bottom'), { placement: 'bottom' });
+        popover(document.getElementById('t-left'), document.getElementById('p-left'), { placement: 'left' });
+        popover(document.getElementById('t-right'), document.getElementById('p-right'), { placement: 'right' });
+    </script>
+</body>
+
+</html>

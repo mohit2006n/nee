@@ -1,0 +1,78 @@
+/**
+ * Switch CSS
+ */
+
+[role="switch"] {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    width: 2.75rem;
+    height: 1.5rem;
+    padding: 0.125rem;
+    border: none;
+    border-radius: 9999px;
+    background: var(--input);
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+[role="switch"]:focus {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+}
+
+[role="switch"][aria-checked="true"] {
+    background: var(--primary);
+}
+
+/* Thumb */
+[role="switch"]::after {
+    content: '';
+    position: absolute;
+    left: 0.125rem;
+    width: 1.25rem;
+    height: 1.25rem;
+    background: var(--background);
+    border-radius: 9999px;
+    box-shadow: var(--shadow-sm);
+    transition: transform 0.2s ease;
+}
+
+[role="switch"][aria-checked="true"]::after {
+    transform: translateX(1.25rem);
+}
+
+/* Disabled */
+[role="switch"]:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Sizes */
+[role="switch"].switch-sm {
+    width: 2rem;
+    height: 1.125rem;
+}
+
+[role="switch"].switch-sm::after {
+    width: 0.875rem;
+    height: 0.875rem;
+}
+
+[role="switch"].switch-sm[aria-checked="true"]::after {
+    transform: translateX(0.875rem);
+}
+
+[role="switch"].switch-lg {
+    width: 3.5rem;
+    height: 2rem;
+}
+
+[role="switch"].switch-lg::after {
+    width: 1.75rem;
+    height: 1.75rem;
+}
+
+[role="switch"].switch-lg[aria-checked="true"]::after {
+    transform: translateX(1.5rem);
+}

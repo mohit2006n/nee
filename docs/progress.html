@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Progress Showcase</title>
+    <link rel="stylesheet" href="../css/globals.css">
+    <link rel="stylesheet" href="../components/progress/progress.css">
+    <link rel="stylesheet" href="../components/button/button.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .header h1 {
+            margin: 0;
+        }
+
+        section {
+            margin-bottom: 3rem;
+        }
+
+        h2 {
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 0.5rem;
+        }
+
+        code {
+            background: var(--secondary);
+            padding: 0.2rem 0.4rem;
+            border-radius: var(--radius-sm);
+        }
+
+        .progress-row {
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Progress</h1>
+            <button id="theme-toggle" class="btn btn-icon btn-ghost" aria-label="Toggle theme">
+                <i data-lucide="sun" class="dark:hidden"></i>
+                <i data-lucide="moon" class="hidden dark:block"></i>
+            </button>
+        </div>
+        <p style="color: var(--muted-foreground); margin-bottom: 2rem;">Native <code>&lt;progress&gt;</code> element.
+        </p>
+
+        <section>
+            <h2>1. Determinate</h2>
+            <div class="progress-row"><progress value="25" max="100"></progress></div>
+            <div class="progress-row"><progress value="50" max="100"></progress></div>
+            <div class="progress-row"><progress value="75" max="100"></progress></div>
+        </section>
+
+        <section>
+            <h2>2. Indeterminate</h2>
+            <progress></progress>
+        </section>
+
+        <section>
+            <h2>3. Sizes</h2>
+            <div class="progress-row"><progress class="sm" value="60" max="100"></progress></div>
+            <div class="progress-row"><progress value="60" max="100"></progress></div>
+            <div class="progress-row"><progress class="lg" value="60" max="100"></progress></div>
+        </section>
+
+        <section>
+            <h2>4. Colors</h2>
+            <div class="progress-row"><progress value="80" max="100"></progress></div>
+            <div class="progress-row"><progress class="destructive" value="30" max="100"></progress></div>
+        </section>
+
+        <section>
+            <h2>5. Interactive</h2>
+            <progress id="demo-progress" value="0" max="100"></progress>
+            <div style="display: flex; gap: 0.5rem; margin-top: 1rem;">
+                <button class="btn btn-sm"
+                    onclick="document.getElementById('demo-progress').value = Math.max(0, document.getElementById('demo-progress').value - 10)">
+                    <i data-lucide="minus"></i>
+                </button>
+                <button class="btn btn-sm"
+                    onclick="document.getElementById('demo-progress').value = Math.min(100, document.getElementById('demo-progress').value + 10)">
+                    <i data-lucide="plus"></i>
+                </button>
+            </div>
+        </section>
+    </div>
+
+    <script type="module">
+        import { initTheme, toggleTheme } from '../js/theme.js';
+        initTheme();
+        lucide.createIcons();
+        document.getElementById('theme-toggle').addEventListener('click', () => {
+            toggleTheme();
+            lucide.createIcons();
+        });
+    </script>
+</body>
+
+</html>

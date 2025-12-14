@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Radio Group Showcase</title>
+    <link rel="stylesheet" href="../css/globals.css">
+    <link rel="stylesheet" href="../components/radio-group/radio-group.css">
+    <link rel="stylesheet" href="../components/button/button.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .header h1 {
+            margin: 0;
+        }
+
+        section {
+            margin-bottom: 3rem;
+        }
+
+        h2 {
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 0.5rem;
+        }
+
+        code {
+            background: var(--secondary);
+            padding: 0.2rem 0.4rem;
+            border-radius: var(--radius-sm);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Radio Group</h1>
+            <button id="theme-toggle" class="btn btn-icon btn-ghost" aria-label="Toggle theme">
+                <i data-lucide="sun" class="dark:hidden"></i>
+                <i data-lucide="moon" class="hidden dark:block"></i>
+            </button>
+        </div>
+        <p style="color: var(--muted-foreground); margin-bottom: 2rem;">Native radio inputs with custom styling.</p>
+
+        <section>
+            <h2>1. Vertical</h2>
+            <div class="radio-group">
+                <label><input type="radio" name="size" value="sm"><span>Small</span></label>
+                <label><input type="radio" name="size" value="md" checked><span>Medium</span></label>
+                <label><input type="radio" name="size" value="lg"><span>Large</span></label>
+            </div>
+        </section>
+
+        <section>
+            <h2>2. Horizontal</h2>
+            <div class="radio-group horizontal">
+                <label><input type="radio" name="plan" value="free"><span>Free</span></label>
+                <label><input type="radio" name="plan" value="pro" checked><span>Pro</span></label>
+                <label><input type="radio" name="plan" value="team"><span>Team</span></label>
+            </div>
+        </section>
+
+        <section>
+            <h2>3. States</h2>
+            <div class="radio-group">
+                <label><input type="radio" name="state" value="1"><span>Default</span></label>
+                <label><input type="radio" name="state" value="2" checked><span>Checked</span></label>
+                <label><input type="radio" name="state" value="3" disabled><span>Disabled</span></label>
+            </div>
+        </section>
+
+        <section>
+            <h2>4. Form Integration</h2>
+            <form onsubmit="event.preventDefault(); alert('Selected: ' + new FormData(this).get('color'));">
+                <div class="radio-group" style="margin-bottom: 1rem;">
+                    <label><input type="radio" name="color" value="red"><span>Red</span></label>
+                    <label><input type="radio" name="color" value="green"><span>Green</span></label>
+                    <label><input type="radio" name="color" value="blue"><span>Blue</span></label>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </section>
+    </div>
+
+    <script type="module">
+        import { initTheme, toggleTheme } from '../js/theme.js';
+        initTheme();
+        lucide.createIcons();
+        document.getElementById('theme-toggle').addEventListener('click', () => {
+            toggleTheme();
+            lucide.createIcons();
+        });
+    </script>
+</body>
+
+</html>

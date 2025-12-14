@@ -1,0 +1,39 @@
+/**
+ * Popover CSS
+ */
+
+[popover] {
+    margin: 0;
+    padding: 1rem;
+    border: 1px solid var(--border);
+    background: var(--popover);
+    color: var(--popover-foreground);
+    box-shadow: var(--shadow-md);
+    border-radius: var(--radius);
+    inset: unset;
+    position: absolute;
+    max-width: 20rem;
+}
+
+[popover]::backdrop {
+    background: transparent;
+}
+
+/* Animation */
+[popover] {
+    opacity: 0;
+    transform: scale(0.95);
+    transition: opacity 0.15s ease, transform 0.15s ease, display 0.15s allow-discrete;
+}
+
+[popover]:popover-open {
+    opacity: 1;
+    transform: scale(1);
+}
+
+@starting-style {
+    [popover]:popover-open {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+}
