@@ -4,17 +4,22 @@
  * Sliding toggle switch (iOS-style).
  */
 export function switchToggle(element, options = {}) {
-    const { checked = false, onChange = () => { } } = options;
+    const {
+        checked = element.getAttribute('aria-checked') === 'true',
+        onChange = () => { }
+    } = options;
+
     let isChecked = checked;
 
     element.setAttribute('role', 'switch');
-    element.setAttribute('tabindex', '0');
+    if (!element.hasAttribute('tabindex')) element.setAttribute('tabindex', '0');
 
     const update = () => {
         element.setAttribute('aria-checked', isChecked.toString());
     };
 
     const handleToggle = () => {
+        if (element.disabled) return;
         isChecked = !isChecked;
         update();
         onChange(isChecked);

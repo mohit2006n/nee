@@ -15,7 +15,6 @@
 export { dropdown, submenu } from './components/dropdown/dropdown.js';
 export { modal } from './components/modal/modal.js';
 export { popover } from './components/popover/popover.js';
-export { progress } from './components/progress/progress.js';
 export { tabs } from './components/tabs/tabs.js';
 export { toggle, toggleGroup } from './components/toggle/toggle.js';
 export { switchToggle } from './components/switch/switch.js';
@@ -29,17 +28,6 @@ export { rovingFocus } from './js/roving-focus.js';
 export { focusScope } from './js/focus-scope.js';
 export { portal } from './js/portal.js';
 export { lockBody, unlockBody } from './js/scroll-lock.js';
-export {
-    computePosition,
-    autoUpdate,
-    offset,
-    shift,
-    flip,
-    size,
-    autoPlacement,
-    hide,
-    inline
-} from './js/floating.js';
 
 /**
  * Initialize Lucide Icons
