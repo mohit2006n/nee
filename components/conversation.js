@@ -49,6 +49,7 @@ function createScrollLatch(container, config) {
 // ============================================================================
 function createSnapLayout(container, config) {
     let target = null;
+    let isSnapped = false;
 
     const getContainerPadding = () => {
         return parseFloat(getComputedStyle(container).paddingTop) || 0;
@@ -58,7 +59,7 @@ function createSnapLayout(container, config) {
         return Math.max(0, element.offsetTop - getContainerPadding());
     };
 
-    const enforce = (overrideHeight = null) => {
+    const enforce = (overrideHeight = null, forceSnap = false) => {
         if (!target) return { isSnapped: false, padding: 0 };
 
         const currentPadding = parseFloat(getComputedStyle(container).paddingBottom) || 0;
@@ -78,32 +79,41 @@ function createSnapLayout(container, config) {
         container.style.paddingBottom = `${neededPadding}px`;
 
         const scrollTop = container.scrollTop;
+        const drift = Math.abs(scrollTop - snapOffset);
 
-        // Position-Based Snap Check:
-        // We are snapped if we are visually at the target (within 2px).
-        // Or if we specifically added padding to force it.
-        const isAtTarget = Math.abs(scrollTop - snapOffset) < 2;
-        const isEffectivelySnapped = neededPadding > 0 || isAtTarget;
-
-        if (isEffectivelySnapped) {
-            // Snap mode: enforce scroll position if we drifted slightly or if override requested
-            if (overrideHeight || (Math.abs(scrollTop - snapOffset) > 0 && Math.abs(scrollTop - snapOffset) < 20)) {
-                container.scrollTop = snapOffset;
-            }
+        // If forceSnap is requested, we apply it regardless of drift
+        if (forceSnap) {
+            isSnapped = true;
+            container.scrollTop = snapOffset;
             return { isSnapped: true, padding: neededPadding };
         }
 
-        // Overflow mode: release control (User scrolled away)
-        return { isSnapped: false, padding: 0 };
+        // Standard check: If we are supposed to be snapped, check if we drifted too far
+        if (isSnapped) {
+            // Allow a small tolerance (e.g., 5px) for sub-pixel/rounding issues.
+            // If drift is significant (> 10px), assume user interaction and break snap.
+            if (drift > 10) {
+                isSnapped = false;
+            } else if (drift > 0) {
+                // Fix small drifts
+                container.scrollTop = snapOffset;
+            }
+        }
+
+        return { isSnapped, padding: neededPadding };
     };
 
     return {
-        setTarget: (element) => { target = element; },
+        setTarget: (element) => {
+            target = element;
+            isSnapped = true;
+        },
         getTarget: () => target,
         calculateOffset,
         enforce,
         clear: () => {
             target = null;
+            isSnapped = false;
             container.style.paddingBottom = '0px';
         }
     };
@@ -170,8 +180,8 @@ export function Conversation(options = {}) {
         // Use requestAnimationFrame to ensure browser has completed layout
         // before we read offsetTop and set scrollTop
         requestAnimationFrame(() => {
-            snapLayout.enforce();
-            container.scrollTop = snapLayout.calculateOffset(element);
+            // Force snap immediately to ensure initial position is correct
+            snapLayout.enforce(null, true);
         });
     };
 
